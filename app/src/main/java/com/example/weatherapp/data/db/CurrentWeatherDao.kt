@@ -8,7 +8,5 @@ import com.example.weatherapp.data.models.Main
 @Dao
 interface CurrentWeatherDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upsert(weatherEntry: Main)
 
 }
