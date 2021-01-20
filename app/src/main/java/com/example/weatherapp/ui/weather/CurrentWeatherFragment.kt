@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui.weather
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -59,6 +60,7 @@ class CurrentWeatherFragment : Fragment() {
 
                     }
 
+                    @SuppressLint("SetTextI18n")
                     override fun onResponse(
                             call: Call<ResponseGetCurrentWeather>,
                             response: Response<ResponseGetCurrentWeather>) {
@@ -67,7 +69,7 @@ class CurrentWeatherFragment : Fragment() {
 
                         textView_condition.text = response.body()?.weather?.get(0)?.description
                         textView_temperature.text = "${response.body()?.main?.temp}°C"
-                        textView_feels_like_temperature.text = "Feels like: ${response.body()?.main?.feels_like}°C"
+                        textView_maxandmin_temperature.text = "max: ${response.body()?.main?.temp_max}°C   min: ${response.body()?.main?.temp_min}°C"
                         textView_wind.text = "Wind: ${response.body()?.wind?.speed} m/sec"
                         textView_humidity.text = "humidity: ${response.body()?.main?.humidity}%"
                         Glide.with(this@CurrentWeatherFragment)

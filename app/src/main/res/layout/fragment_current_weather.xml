@@ -104,7 +104,7 @@
         tools:text="25.0°C" />
 
     <TextView
-        android:id="@+id/textView_feels_like_temperature"
+        android:id="@+id/textView_maxandmin_temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
