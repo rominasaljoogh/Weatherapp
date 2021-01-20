@@ -43,8 +43,6 @@ class CurrentWeatherFragment : Fragment() {
         getWeather()
 
 
-
-
     }
 
     private fun getWeather() {
@@ -64,6 +62,8 @@ class CurrentWeatherFragment : Fragment() {
                     override fun onResponse(
                             call: Call<ResponseGetCurrentWeather>,
                             response: Response<ResponseGetCurrentWeather>) {
+
+                        group_loading.visibility = View.GONE
 
                         textView_condition.text = response.body()?.weather?.get(0)?.description
                         textView_temperature.text = "${response.body()?.main?.temp}°C"
