@@ -1,7 +1,9 @@
 package com.example.weatherapp.data.models
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
+@Entity
 data class ResponseGetCurrentWeather(
     @SerializedName("base")
     var base: String? = null,

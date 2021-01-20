@@ -1,7 +1,9 @@
 package com.example.weatherapp.data.models
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "current_weather")
 data class Main(
     @SerializedName("feels_like")
     var feels_like: Double? = null,
