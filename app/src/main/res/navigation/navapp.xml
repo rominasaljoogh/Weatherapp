@@ -14,5 +14,9 @@
         android:id="@+id/forecast7DayFragment"
         android:name="com.example.weatherapp.ui.forecast.Forecast7DayFragment"
         android:label="Forecast7DayFragment" />
+    <fragment
+        android:id="@+id/settingsFragment2"
+        android:name="com.example.weatherapp.ui.Setting.SettingsFragment"
+        android:label="SettingsFragment" />
 
 </navigation>
