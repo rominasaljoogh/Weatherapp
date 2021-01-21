@@ -1,4 +1,4 @@
-package com.example.weatherapp.ui.Setting
+package com.example.weatherapp.ui.setting
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

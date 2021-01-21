@@ -1,6 +1,6 @@
 package com.example.weatherapp.data
 
-import com.example.weatherapp.data.models.ResponseGetCurrentWeather
+import com.example.weatherapp.data.currentweatherModels.ResponseGetCurrentWeather
 import retrofit2.Call
 import retrofit2.http.POST
 import retrofit2.http.Query

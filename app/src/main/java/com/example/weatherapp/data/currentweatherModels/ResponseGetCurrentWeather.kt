@@ -1,34 +1,37 @@
-package com.example.weatherapp.data.models
+package com.example.weatherapp.data.currentweatherModels
 
-import androidx.room.Entity
+
 import com.google.gson.annotations.SerializedName
+import androidx.annotation.Keep
+import androidx.room.Entity
 
+@Keep
 @Entity
 data class ResponseGetCurrentWeather(
     @SerializedName("base")
-    var base: String? = null,
+    val base: String,
     @SerializedName("clouds")
-    var clouds: Clouds? = null,
+    val clouds: Clouds,
     @SerializedName("cod")
-    var cod: Int? = null,
+    val cod: Int,
     @SerializedName("coord")
-    var coord: Coord? = null,
+    val coord: Coord,
     @SerializedName("dt")
-    var dt: Int? = null,
+    val dt: Int,
     @SerializedName("id")
-    var id: Int? = null,
+    val id: Int,
     @SerializedName("main")
-    var main: Main? = null,
+    val main: Main,
     @SerializedName("name")
-    var name: String? = null,
+    val name: String,
     @SerializedName("sys")
-    var sys: Sys? = null,
+    val sys: Sys,
     @SerializedName("timezone")
-    var timezone: Int? = null,
+    val timezone: Int,
     @SerializedName("visibility")
-    var visibility: Int? = null,
+    val visibility: Int,
     @SerializedName("weather")
-    var weather: List<Weather>? = null,
+    val weather: List<Weather>,
     @SerializedName("wind")
-    var wind: Wind? = null
+    val wind: Wind
 )

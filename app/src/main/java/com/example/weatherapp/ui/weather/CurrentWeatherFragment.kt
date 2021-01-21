@@ -12,7 +12,7 @@ import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
 import com.example.weatherapp.data.ApiCurrentWeather
-import com.example.weatherapp.data.models.ResponseGetCurrentWeather
+import com.example.weatherapp.data.currentweatherModels.ResponseGetCurrentWeather
 import com.example.weatherapp.data.retrofitWeatherInstance
 import kotlinx.android.synthetic.main.fragment_current_weather.*
 import retrofit2.Call
@@ -68,10 +68,10 @@ class CurrentWeatherFragment : Fragment() {
                         group_loading.visibility = View.GONE
 
                         textView_condition.text = response.body()?.weather?.get(0)?.description
-                        textView_temperature.text = "${response.body()?.main?.temp}°C"
-                        textView_maxandmin_temperature.text = "max: ${response.body()?.main?.temp_max}°C   min: ${response.body()?.main?.temp_min}°C"
+                        textView_temperature.text = "${response.body()?.main?.temp} °C"
+                        textView_maxandmin_temperature.text = "Feels like: ${response.body()?.main?.feelsLike} °C"
                         textView_wind.text = "Wind: ${response.body()?.wind?.speed} m/sec"
-                        textView_humidity.text = "humidity: ${response.body()?.main?.humidity}%"
+                        textView_humidity.text = "humidity: ${response.body()?.main?.humidity} %"
                         Glide.with(this@CurrentWeatherFragment)
                                 .load("http://openweathermap.org/img/wn/${response.body()?.weather?.get(0)?.icon}@2x.png")
                                 .into(imageView_condition_icon)
