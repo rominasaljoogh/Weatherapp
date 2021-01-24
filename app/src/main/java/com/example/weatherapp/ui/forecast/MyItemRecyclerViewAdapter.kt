@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
-import com.example.weatherapp.data.forecastweatherModels.ResponseGetForecastWeather
+import com.example.weatherapp.data.entity.forecastweatherModels.ResponseGetForecastWeather
 import kotlinx.android.synthetic.main.fragment_forecast7_day.view.*
 
 class MyItemRecyclerViewAdapter(

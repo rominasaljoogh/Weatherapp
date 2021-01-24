@@ -12,7 +12,7 @@ import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
 import com.example.weatherapp.data.ApiCurrentWeather
-import com.example.weatherapp.data.currentweatherModels.ResponseGetCurrentWeather
+import com.example.weatherapp.data.entity.currentweatherModels.ResponseGetCurrentWeather
 import com.example.weatherapp.data.retrofitWeatherInstance
 import kotlinx.android.synthetic.main.fragment_current_weather.*
 import retrofit2.Call
