@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navapp"
-    app:startDestination="@id/currentWeatherFragment2">
+    app:startDestination="@id/currentWeatherFragment">
 
     <fragment
-        android:id="@+id/currentWeatherFragment2"
+        android:id="@+id/currentWeatherFragment"
         android:name="com.example.weatherapp.ui.weather.CurrentWeatherFragment"
         android:label="current_weather_fragment"
         tools:layout="@layout/fragment_current_weather" />
@@ -14,9 +14,8 @@
         android:id="@+id/forecast7DayFragment"
         android:name="com.example.weatherapp.ui.forecast.Forecast7DayFragment"
         android:label="Forecast7DayFragment" />
-
     <fragment
-        android:id="@+id/settingsFragment2"
+        android:id="@+id/settingsFragment"
         android:name="com.example.weatherapp.ui.setting.SettingsFragment"
         android:label="SettingsFragment" />
 
