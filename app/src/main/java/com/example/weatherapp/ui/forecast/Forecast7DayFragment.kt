@@ -46,7 +46,7 @@ class Forecast7DayFragment : Fragment() {
 
         val forcastWeatherService = retrofit.create(ApiForecastWeather::class.java)
 
-        forcastWeatherService.getForecastWeather("tehran", "80f4cf199c6d13111b4d9a31580c3118", "metric")
+        forcastWeatherService.getForecastWeather("tehran", "80f4cf199c6d13111b4d9a31580c3118",7, "metric")
                 .enqueue(object : Callback<ResponseGetForecastWeather> {
                     override fun onFailure(call: Call<ResponseGetForecastWeather>, t: Throwable) {
 
@@ -65,11 +65,10 @@ class Forecast7DayFragment : Fragment() {
                 })
     }
 
-    private fun registerRecycler(){
+    private fun registerRecycler(data:ResponseGetForecastWeather){
 
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL , false)
-        recyclerView.adapter = MyItemRecyclerViewAdapter (FutureWeatherEntity())
-
+        recyclerView.adapter = MyItemRecyclerViewAdapter (data)
     }
 
 }

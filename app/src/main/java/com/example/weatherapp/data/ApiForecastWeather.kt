@@ -14,6 +14,7 @@ interface ApiForecastWeather {
     fun getForecastWeather(
             @Query("q") cityName : String,
             @Query("appid") appId : String,
+            @Query("cnt") cnt: Int,
             @Query("units") units : String
     ): Call<ResponseGetForecastWeather>
 }

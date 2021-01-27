@@ -7,11 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
-import com.example.weatherapp.data.entity.forecastweatherModels.FutureWeatherEntity
+import com.example.weatherapp.data.entity.forecastweatherModels.ResponseGetForecastWeather
 import kotlinx.android.synthetic.main.fragment_forecast7_day.view.*
 
 class MyItemRecyclerViewAdapter(
-    private val data: FutureWeatherEntity
+    private val data: ResponseGetForecastWeather
 //    , private val onclick : (ResponseGetForecastWeather) -> Unit
 ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
@@ -23,9 +23,9 @@ class MyItemRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.textView_condition.text = ""
-        holder.textView_date.text = ""
-        holder.textView_temperature.text = ""
+        holder.textView_condition.text = data.weather[position].description
+        holder.textView_date.text = data.dt.toString()
+        holder.textView_temperature.text = data.temp.day.toString()
         Glide.with(holder.itemView.context)
                 .load("http:")
                 .into(holder.imageView_condition_icon)
