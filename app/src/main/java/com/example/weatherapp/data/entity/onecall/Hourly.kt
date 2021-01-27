@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.entity.FutureWetherModels
+package com.example.weatherapp.data.entity.onecall
 
 
 import com.google.gson.annotations.SerializedName
@@ -27,7 +27,7 @@ data class Hourly(
     @SerializedName("visibility")
     val visibility: Int,
     @SerializedName("weather")
-    val weather: List<WeatherX>,
+    val weather: List<Weather>,
     @SerializedName("wind_deg")
     val windDeg: Int,
     @SerializedName("wind_speed")

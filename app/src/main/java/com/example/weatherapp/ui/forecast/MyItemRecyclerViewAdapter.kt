@@ -7,13 +7,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
-import com.example.weatherapp.data.entity.FutureWetherModels.ResponseGetFutureWeather
-import com.example.weatherapp.data.entity.forecastweatherModels.ResponseGetForecastWeather
+import com.example.weatherapp.data.entity.onecall.ResponseGetWeather
 import kotlinx.android.synthetic.main.fragment_current_weather.*
 import kotlinx.android.synthetic.main.fragment_forecast7_day.view.*
 
 class MyItemRecyclerViewAdapter(
-    private val responseData: ResponseGetFutureWeather
+    private val responseData: ResponseGetWeather
 //    , private val onclick : (ResponseGetFutureWeather) -> Unit
 ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
@@ -25,11 +24,11 @@ class MyItemRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.textView_condition.text = responseData.weather?.get(0)?.main
-        holder.textView_date.text = responseData.dt.toString()
-        holder.textView_temperature.text = responseData.temp.day.toString()
+        holder.textView_condition.text = responseData.daily[position].weather[0].description
+        holder.textView_date.text = responseData.daily[position].dt.toString()
+        holder.textView_temperature.text = responseData.daily[position].temp.day.toString()
         Glide.with(holder.itemView.context)
-                .load("http://openweathermap.org/img/wn/${responseData.weather?.get(0)?.icon}@2x.png")
+                .load("http://openweathermap.org/img/wn/${responseData.daily[position].weather?.get(0)?.icon}@2x.png")
                 .into(holder.imageView_condition_icon)
 
 //        holder.itemView.setOnClickListener{
@@ -37,9 +36,7 @@ class MyItemRecyclerViewAdapter(
 //          }
         }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = responseData.daily.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
