@@ -8,8 +8,8 @@ import com.example.weatherapp.data.entity.currentweatherModels.CURRENT_WEATHER_I
 import com.example.weatherapp.data.entity.currentweatherModels.ResponseGetCurrentWeather
 
 interface CurrentWeatherDao {
-    @Insert(onConflict =  OnConflictStrategy.REPLACE)
-    fun insertAllData(weatherEntry: ResponseGetCurrentWeather?)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun upsert(weatherEntry: ResponseGetCurrentWeather)
 
     @Query("select * from current_weather where id = $CURRENT_WEATHER_ID")
     fun getAllWeather(): LiveData<ResponseGetCurrentWeather>

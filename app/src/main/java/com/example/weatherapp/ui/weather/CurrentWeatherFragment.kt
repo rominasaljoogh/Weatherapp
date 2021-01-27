@@ -78,7 +78,7 @@ class CurrentWeatherFragment : Fragment() {
                         Glide.with(this@CurrentWeatherFragment)
                                 .load("http://openweathermap.org/img/wn/${response.body()?.weather?.get(0)?.icon}@2x.png")
                                 .into(imageView_condition_icon)
-                        dataCurrentDao?.insertAllData(response.body())
+                        response.body()?.let { dataCurrentDao?.upsert(it) }
                     }
 
                 })
