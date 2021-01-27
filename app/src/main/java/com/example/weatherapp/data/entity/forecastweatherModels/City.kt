@@ -3,19 +3,18 @@ package com.example.weatherapp.data.entity.forecastweatherModels
 
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import androidx.room.Embedded
 
 @Keep
-data class Sys(
+data class City(
+    @Embedded( prefix = "Coord_")
+    val coord: Coord,
     @SerializedName("country")
     val country: String,
     @SerializedName("id")
     val id: Int,
-    @SerializedName("message")
-    val message: Double,
-    @SerializedName("sunrise")
-    val sunrise: Int,
-    @SerializedName("sunset")
-    val sunset: Int,
-    @SerializedName("type")
-    val type: Int
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("population")
+    val population: Int
 )

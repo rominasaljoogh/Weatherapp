@@ -1,6 +1,5 @@
 package com.example.weatherapp.ui.forecast
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,12 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.data.ApiForecastWeather
+import com.example.weatherapp.data.entity.forecastweatherModels.FutureWeatherEntity
 import com.example.weatherapp.data.entity.forecastweatherModels.ResponseGetForecastWeather
 import com.example.weatherapp.data.retrofitWeatherInstance
-import kotlinx.android.synthetic.main.fragment_current_weather.*
+import kotlinx.android.synthetic.main.fragment_forecast7_day_list.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,15 +36,17 @@ class Forecast7DayFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
+        getWeather()
+
     }
 
     private fun getWeather() {
 
         val retrofit = retrofitWeatherInstance.getRetrofitInstance()
 
-        val currentWeatherService = retrofit.create(ApiForecastWeather::class.java)
+        val forcastWeatherService = retrofit.create(ApiForecastWeather::class.java)
 
-        currentWeatherService.getCurrentWeather("tehran", "80f4cf199c6d13111b4d9a31580c3118", "metric")
+        forcastWeatherService.getForecastWeather("tehran", "80f4cf199c6d13111b4d9a31580c3118", "metric")
                 .enqueue(object : Callback<ResponseGetForecastWeather> {
                     override fun onFailure(call: Call<ResponseGetForecastWeather>, t: Throwable) {
 
@@ -52,21 +54,12 @@ class Forecast7DayFragment : Fragment() {
 
                     }
 
-                    @SuppressLint("SetTextI18n")
-                    override fun onResponse(
-                            call: Call<ResponseGetForecastWeather>,
-                            response: Response<ResponseGetForecastWeather>) {
+                    override fun onResponse(call: Call<ResponseGetForecastWeather>,
+                                            response: Response<ResponseGetForecastWeather>) {
 
                         group_loading.visibility = View.GONE
+                        response.body()?.let { registerRecycler(it) }
 
-                        textView_condition.text = response.body()?.weather?.get(0)?.description
-                        textView_temperature.text = "${response.body()?.main?.temp} °C"
-                        textView_maxandmin_temperature.text = "Feels like: ${response.body()?.main?.pressure} °C"
-                        textView_wind.text = "Wind: ${response.body()?.wind?.speed} m/sec"
-                        textView_humidity.text = "humidity: ${response.body()?.main?.humidity} %"
-                        Glide.with(this@Forecast7DayFragment)
-                                .load("http://openweathermap.org/img/wn/${response.body()?.weather?.get(0)?.icon}@2x.png")
-                                .into(imageView_condition_icon)
                     }
 
                 })
@@ -74,8 +67,8 @@ class Forecast7DayFragment : Fragment() {
 
     private fun registerRecycler(){
 
-        //noteList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL , false)
-        //noteList.adapter = MyItemRecyclerViewAdapter (data as MutableList<ResponseGetForecastWeather>){}
+        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL , false)
+        recyclerView.adapter = MyItemRecyclerViewAdapter (FutureWeatherEntity())
 
     }
 

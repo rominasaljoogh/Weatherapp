@@ -36,11 +36,6 @@ class CurrentWeatherFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        val clickedTime = System.currentTimeMillis()
-        Log.d("TESTEST" , (clickedTime - time).toString())
-
-        time = clickedTime
-
         getWeather()
 
 

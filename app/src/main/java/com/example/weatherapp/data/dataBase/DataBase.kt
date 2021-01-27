@@ -9,17 +9,12 @@ import com.example.weatherapp.data.db.CurrentWeatherDao
 import com.example.weatherapp.data.db.ForecastWeatherDao
 import com.example.weatherapp.data.entity.currentweatherModels.CurrentWeatherListConverter
 import com.example.weatherapp.data.entity.currentweatherModels.ResponseGetCurrentWeather
-import com.example.weatherapp.data.entity.forecastweatherModels.ResponseGetForecastWeather
-
-
-
-
-
+import com.example.weatherapp.data.entity.forecastweatherModels.FutureWeatherEntity
 
 
 @Database(
         entities = [ResponseGetCurrentWeather ::class ,
-                    ResponseGetForecastWeather ::class] , version = 1)
+                    FutureWeatherEntity ::class] , version = 1)
 @TypeConverters(CurrentWeatherListConverter::class)
 abstract class DataBase : RoomDatabase() {
 
