@@ -12,7 +12,7 @@ import androidx.room.TypeConverters
 const val CURRENT_WEATHER_ID = 0
 
 @Keep
-@Entity ( tableName = "CurrentWeather")
+@Entity ( tableName = "current_weather")
 data class ResponseGetCurrentWeather(
     @SerializedName("base")
     val base: String,
@@ -40,8 +40,7 @@ data class ResponseGetCurrentWeather(
     @TypeConverters(CurrentWeatherListConverter::class)
     val weather: List<Weather>,
     @Embedded( prefix = "wind_")
-    val wind: Wind
-) {
+    val wind: Wind,
     @PrimaryKey(autoGenerate = false)
     var idCurrentWeather : Int = CURRENT_WEATHER_ID
-}
+)

@@ -6,7 +6,7 @@ import androidx.annotation.Keep
 import androidx.room.Embedded
 
 @Keep
-data class FutureWeatherEntity(
+data class FutureWeatherEnt(
     @Embedded( prefix = "city_")
     val city: City,
     @SerializedName("cnt")

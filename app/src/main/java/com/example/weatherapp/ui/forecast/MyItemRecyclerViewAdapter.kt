@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
 import com.example.weatherapp.data.entity.forecastweatherModels.ResponseGetForecastWeather
+import kotlinx.android.synthetic.main.fragment_current_weather.*
 import kotlinx.android.synthetic.main.fragment_forecast7_day.view.*
 
 class MyItemRecyclerViewAdapter(
@@ -23,14 +24,16 @@ class MyItemRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.textView_condition.text = data.weather[position].description
+        holder.textView_condition.text = data.weather?.get(0)?.main
         holder.textView_date.text = data.dt.toString()
         holder.textView_temperature.text = data.temp.day.toString()
         Glide.with(holder.itemView.context)
-                .load("http:")
+                .load("http://openweathermap.org/img/wn/${data.weather?.get(0)?.icon}@2x.png")
                 .into(holder.imageView_condition_icon)
+
 //        holder.itemView.setOnClickListener{
 //            onclick(data[position])
+//          }
         }
 
     override fun getItemCount(): Int {

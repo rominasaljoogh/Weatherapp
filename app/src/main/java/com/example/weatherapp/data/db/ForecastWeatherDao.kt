@@ -2,7 +2,6 @@ package com.example.weatherapp.data.db
 
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import com.example.weatherapp.data.entity.forecastweatherModels.FutureWeatherEntity
 import com.example.weatherapp.data.entity.forecastweatherModels.ResponseGetForecastWeather
 
 

@@ -9,7 +9,6 @@ import com.example.weatherapp.data.db.CurrentWeatherDao
 import com.example.weatherapp.data.db.ForecastWeatherDao
 import com.example.weatherapp.data.entity.currentweatherModels.CurrentWeatherListConverter
 import com.example.weatherapp.data.entity.currentweatherModels.ResponseGetCurrentWeather
-import com.example.weatherapp.data.entity.forecastweatherModels.FutureWeatherEntity
 import com.example.weatherapp.data.entity.forecastweatherModels.ResponseGetForecastWeather
 
 
@@ -24,13 +23,13 @@ abstract class DataBase : RoomDatabase() {
 
     companion object {
 
-        private var INSTANCE : DataBase? = null
+        var INSTANCE : DataBase? = null
 
-        private fun getDataBaseInstance(context: Context) : DataBase? {
+        fun getDataBaseInstance(context: Context) : DataBase? {
             if(INSTANCE == null){
                 synchronized(DataBase::class){
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
-                                                    DataBase::class.java, "weatherEntries.db")
+                                                    DataBase::class.java, "weatherEntriesDB")
                                                     .allowMainThreadQueries()
                                                     .build()
                 }
@@ -38,6 +37,4 @@ abstract class DataBase : RoomDatabase() {
             return INSTANCE
         }
     }
-
-
 }

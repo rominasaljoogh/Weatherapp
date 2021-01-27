@@ -11,7 +11,6 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.data.ApiForecastWeather
-import com.example.weatherapp.data.entity.forecastweatherModels.FutureWeatherEntity
 import com.example.weatherapp.data.entity.forecastweatherModels.ResponseGetForecastWeather
 import com.example.weatherapp.data.retrofitWeatherInstance
 import kotlinx.android.synthetic.main.fragment_forecast7_day_list.*
@@ -45,6 +44,7 @@ class Forecast7DayFragment : Fragment() {
         val retrofit = retrofitWeatherInstance.getRetrofitInstance()
 
         val forcastWeatherService = retrofit.create(ApiForecastWeather::class.java)
+
 
         forcastWeatherService.getForecastWeather("tehran", "80f4cf199c6d13111b4d9a31580c3118",7, "metric")
                 .enqueue(object : Callback<ResponseGetForecastWeather> {

@@ -2,16 +2,18 @@ package com.example.weatherapp.ui.weather
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
 import com.example.weatherapp.data.ApiCurrentWeather
+import com.example.weatherapp.data.dataBase.DataBase
+import com.example.weatherapp.data.db.CurrentWeatherDao
 import com.example.weatherapp.data.entity.currentweatherModels.ResponseGetCurrentWeather
 import com.example.weatherapp.data.retrofitWeatherInstance
 import kotlinx.android.synthetic.main.fragment_current_weather.*
@@ -21,8 +23,10 @@ import retrofit2.Response
 
 class CurrentWeatherFragment : Fragment() {
 
+    var dataBase: DataBase? = null
+    var dataCurrentDao: CurrentWeatherDao? = null
+
     private lateinit var  navController : NavController
-    var time = System.currentTimeMillis()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -37,6 +41,7 @@ class CurrentWeatherFragment : Fragment() {
         navController = Navigation.findNavController(view)
 
         getWeather()
+        configureDB()
 
 
     }
@@ -51,16 +56,19 @@ class CurrentWeatherFragment : Fragment() {
                 .enqueue(object : Callback<ResponseGetCurrentWeather> {
                     override fun onFailure(call: Call<ResponseGetCurrentWeather>, t: Throwable) {
 
-                        t.message?.let { Log.e("TESTEST" , it) }
+                        group_loading.visibility = View.GONE
+                        dataCurrentDao?.getAllWeather()
 
                     }
 
-                    @SuppressLint("SetTextI18n")
+
                     override fun onResponse(
                             call: Call<ResponseGetCurrentWeather>,
                             response: Response<ResponseGetCurrentWeather>) {
 
                         group_loading.visibility = View.GONE
+
+                        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "Today"
 
                         textView_condition.text = response.body()?.weather?.get(0)?.description
                         textView_temperature.text = "${response.body()?.main?.temp} °C"
@@ -70,9 +78,15 @@ class CurrentWeatherFragment : Fragment() {
                         Glide.with(this@CurrentWeatherFragment)
                                 .load("http://openweathermap.org/img/wn/${response.body()?.weather?.get(0)?.icon}@2x.png")
                                 .into(imageView_condition_icon)
+                        dataCurrentDao?.insertAllData(response.body())
                     }
 
                 })
+    }
+
+    private fun configureDB(){
+        dataBase = DataBase.getDataBaseInstance(requireContext())
+        dataCurrentDao = dataBase?.getCurrentWeatherDao()
     }
 
 }
