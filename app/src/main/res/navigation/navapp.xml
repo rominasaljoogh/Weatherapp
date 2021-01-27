@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navapp"
+    android:id="@+id/nav_app"
     app:startDestination="@id/currentWeatherFragment">
 
     <fragment
@@ -10,10 +10,13 @@
         android:name="com.example.weatherapp.ui.weather.CurrentWeatherFragment"
         android:label="current_weather_fragment"
         tools:layout="@layout/fragment_current_weather" />
+
     <fragment
         android:id="@+id/forecast7DayFragment"
         android:name="com.example.weatherapp.ui.forecast.Forecast7DayFragment"
-        android:label="Forecast7DayFragment" />
+        android:label="Forecast7DayFragment"
+        tools:layout="@layout/fragment_forecast7_day_list"/>
+
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.weatherapp.ui.setting.SettingsFragment"

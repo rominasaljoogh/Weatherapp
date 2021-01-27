@@ -11,7 +11,6 @@ import com.example.weatherapp.data.entity.currentweatherModels.CurrentWeatherLis
 import com.example.weatherapp.data.entity.currentweatherModels.ResponseGetCurrentWeather
 import com.example.weatherapp.data.entity.forecastweatherModels.ResponseGetForecastWeather
 
-
 @Database(
         entities = [ResponseGetCurrentWeather ::class ,
                     ResponseGetForecastWeather ::class] , version = 1)

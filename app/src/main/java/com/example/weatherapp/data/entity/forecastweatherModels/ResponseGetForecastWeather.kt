@@ -1,6 +1,5 @@
 package com.example.weatherapp.data.entity.forecastweatherModels
 
-
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
 import androidx.room.Embedded
@@ -14,7 +13,7 @@ import com.example.weatherapp.data.entity.currentweatherModels.Weather
 const val Future_WEATHER_ID = 0
 
 @Keep
-@Entity( tableName = "FutureWeather")
+@Entity( tableName = "future_weather")
 data class ResponseGetForecastWeather (
         @SerializedName("clouds")
     val clouds: Int,

@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_today"
         android:title="@string/today"/>
     <item
-        android:id="@+id/futureListWeatherFragment"
+        android:id="@+id/forecast7DayFragment"
         android:icon="@drawable/ic_calendar"
         android:title="@string/_7_days"/>
     <item

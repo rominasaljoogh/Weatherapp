@@ -7,13 +7,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
+import com.example.weatherapp.data.entity.FutureWetherModels.ResponseGetFutureWeather
 import com.example.weatherapp.data.entity.forecastweatherModels.ResponseGetForecastWeather
 import kotlinx.android.synthetic.main.fragment_current_weather.*
 import kotlinx.android.synthetic.main.fragment_forecast7_day.view.*
 
 class MyItemRecyclerViewAdapter(
-    private val data: ResponseGetForecastWeather
-//    , private val onclick : (ResponseGetForecastWeather) -> Unit
+    private val responseData: ResponseGetFutureWeather
+//    , private val onclick : (ResponseGetFutureWeather) -> Unit
 ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,11 +25,11 @@ class MyItemRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.textView_condition.text = data.weather?.get(0)?.main
-        holder.textView_date.text = data.dt.toString()
-        holder.textView_temperature.text = data.temp.day.toString()
+        holder.textView_condition.text = responseData.weather?.get(0)?.main
+        holder.textView_date.text = responseData.dt.toString()
+        holder.textView_temperature.text = responseData.temp.day.toString()
         Glide.with(holder.itemView.context)
-                .load("http://openweathermap.org/img/wn/${data.weather?.get(0)?.icon}@2x.png")
+                .load("http://openweathermap.org/img/wn/${responseData.weather?.get(0)?.icon}@2x.png")
                 .into(holder.imageView_condition_icon)
 
 //        holder.itemView.setOnClickListener{
