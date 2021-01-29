@@ -1,12 +1,11 @@
-package com.example.weatherapp.data.entity.forecastweatherModels
+package com.example.weatherapp.data.entity
 
 import androidx.room.TypeConverter
-import com.example.weatherapp.data.entity.currentweatherModels.Weather
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 
-class FutureWeatherListConverter {
+class WeatherListConverter {
     @TypeConverter
     fun fromWeatherList(weather: List<Weather?>?): String? {
         if (weather == null) {

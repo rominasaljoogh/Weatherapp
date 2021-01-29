@@ -1,31 +1,33 @@
-package com.example.weatherapp.data.entity.onecall
+package com.example.weatherapp.data.entity
 
-
+import androidx.room.Embedded
 import com.google.gson.annotations.SerializedName
-import androidx.annotation.Keep
 
-@Keep
-data class Hourly(
+data class Daily(
     @SerializedName("clouds")
     val clouds: Int,
     @SerializedName("dew_point")
     val dewPoint: Double,
     @SerializedName("dt")
     val dt: Int,
-    @SerializedName("feels_like")
-    val feelsLike: Double,
+    @Embedded( prefix = "feelsLike_")
+    val feelsLike: FeelsLike,
     @SerializedName("humidity")
     val humidity: Int,
     @SerializedName("pop")
-    val pop: Int,
+    val pop: Double,
     @SerializedName("pressure")
     val pressure: Int,
-    @SerializedName("temp")
-    val temp: Double,
+    @SerializedName("rain")
+    val rain: Double,
+    @SerializedName("sunrise")
+    val sunrise: Int,
+    @SerializedName("sunset")
+    val sunset: Int,
+    @Embedded( prefix = "temp_")
+    val temp: Temp,
     @SerializedName("uvi")
     val uvi: Double,
-    @SerializedName("visibility")
-    val visibility: Int,
     @SerializedName("weather")
     val weather: List<Weather>,
     @SerializedName("wind_deg")

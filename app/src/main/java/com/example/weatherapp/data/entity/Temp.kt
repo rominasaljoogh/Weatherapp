@@ -1,10 +1,7 @@
-package com.example.weatherapp.data.entity.onecall
-
+package com.example.weatherapp.data.entity
 
 import com.google.gson.annotations.SerializedName
-import androidx.annotation.Keep
 
-@Keep
 data class Temp(
     @SerializedName("day")
     val day: Double,

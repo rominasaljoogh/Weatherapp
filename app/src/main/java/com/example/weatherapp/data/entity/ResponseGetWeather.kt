@@ -1,11 +1,8 @@
-package com.example.weatherapp.data.entity.onecall
+package com.example.weatherapp.data.entity
 
-
-import com.google.gson.annotations.SerializedName
-import androidx.annotation.Keep
 import androidx.room.Embedded
+import com.google.gson.annotations.SerializedName
 
-@Keep
 data class ResponseGetWeather(
     @Embedded( prefix = "current_")
     val current: Current,

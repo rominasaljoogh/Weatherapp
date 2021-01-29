@@ -1,40 +1,47 @@
-package com.example.weatherapp.data.entity.onecall
+package com.example.weatherapp.data.entity
 
-
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
-import androidx.annotation.Keep
-import androidx.room.Embedded
 
-@Keep
-data class Daily(
+const val CURRENT_WEATHER_ID = 0
+
+@Entity(tableName = "current_weather")
+data class Current(
     @SerializedName("clouds")
     val clouds: Int,
     @SerializedName("dew_point")
     val dewPoint: Double,
     @SerializedName("dt")
     val dt: Int,
-    @Embedded( prefix = "feelsLike_")
-    val feelsLike: FeelsLike,
+    @SerializedName("feels_like")
+    val feelsLike: Double,
     @SerializedName("humidity")
     val humidity: Int,
-    @SerializedName("pop")
-    val pop: Double,
     @SerializedName("pressure")
     val pressure: Int,
-    @SerializedName("rain")
-    val rain: Double,
     @SerializedName("sunrise")
     val sunrise: Int,
     @SerializedName("sunset")
     val sunset: Int,
-    @Embedded( prefix = "temp_")
-    val temp: Temp,
+    @SerializedName("temp")
+    val temp: Double,
     @SerializedName("uvi")
     val uvi: Double,
+    @SerializedName("visibility")
+    val visibility: Int,
     @SerializedName("weather")
+    @TypeConverters(WeatherListConverter::class)
     val weather: List<Weather>,
     @SerializedName("wind_deg")
     val windDeg: Int,
+    @SerializedName("wind_gust")
+    val windGust: Double,
     @SerializedName("wind_speed")
     val windSpeed: Double
-)
+){
+    @PrimaryKey(autoGenerate = false)
+    var id: Int = CURRENT_WEATHER_ID
+}
