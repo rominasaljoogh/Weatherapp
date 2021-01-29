@@ -15,6 +15,7 @@ import com.example.weatherapp.data.entity.ResponseGetWeather
 import com.example.weatherapp.data.network.ApiWeather
 import com.example.weatherapp.data.network.RetrofitWeatherInstance
 import com.example.weatherapp.data.provider.UnitProvider
+import com.example.weatherapp.data.provider.UnitProviderImpl
 import com.example.weatherapp.data.provider.UnitSystem
 import kotlinx.android.synthetic.main.fragment_current_weather.*
 import retrofit2.Call
@@ -26,7 +27,7 @@ class CurrentWeatherFragment : Fragment() {
     var dataBase: DataBase? = null
     var currentDao: CurrentWeatherDao? = null
 
-    private lateinit var unitProvider : UnitProvider
+    var unit : Boolean? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -39,6 +40,10 @@ class CurrentWeatherFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         (activity as? AppCompatActivity)?.supportActionBar?.title = "Today"
+
+        val unitProvider = UnitProviderImpl(requireContext()).getUnitSystem()
+        if(unitProvider==UnitSystem.METRIC) unit=true
+
 
         getWeather()
         //configureDB()
@@ -56,7 +61,9 @@ class CurrentWeatherFragment : Fragment() {
         val retrofit = RetrofitWeatherInstance.getRetrofitInstance()
         val currentWeatherService = retrofit.create(ApiWeather::class.java)
 
-        currentWeatherService.getWeather("33.441792", "-94.037689","80f4cf199c6d13111b4d9a31580c3118","metric")
+        val unitapi = chooseUnit("metric", "imperial")
+
+        currentWeatherService.getWeather("33.441792", "-94.037689","80f4cf199c6d13111b4d9a31580c3118","$unitapi")
                 .enqueue(object : Callback<ResponseGetWeather> {
                     override fun onFailure(call: Call<ResponseGetWeather>, t: Throwable) {
 
@@ -96,22 +103,22 @@ class CurrentWeatherFragment : Fragment() {
     }
 
     private fun chooseUnit(metric: String, imperial: String): String {
-        return if (unitProvider.getUnitSystem() == UnitSystem.METRIC) metric else imperial
+        return if (unit == true) metric else imperial
     }
 
     private fun updateTemperatures(temperature: Double, feelsLike: Double) {
-        //val unitAbbreviation = chooseUnit("°C", "°F")
-        textView_temperature.text = "$temperature"
-        textView_feels_like_temperature.text = "Feels like: $feelsLike"
+        val unitAbbreviation = chooseUnit("°C", "°F")
+        textView_temperature.text = "$temperature $unitAbbreviation"
+        textView_feels_like_temperature.text = "Feels like: $feelsLike $unitAbbreviation"
     }
 
     private fun updateWind(windSpeed: Double) {
-        //val unitAbbreviation = chooseUnit("kph", "mph")
-        textView_wind.text = "Wind: $windSpeed"
+        val unitAbbreviation = chooseUnit("kph", "mph")
+        textView_wind.text = "Wind: $windSpeed $unitAbbreviation"
     }
 
     private fun updateVisibility(visibilityDistance: Int) {
-        //val unitAbbreviation = chooseUnit("km", "mi.")
-        textView_visibility.text = "Visibility: $visibilityDistance"
+        val unitAbbreviation = chooseUnit("km", "mi.")
+        textView_visibility.text = "Visibility: $visibilityDistance $unitAbbreviation"
     }
 }
