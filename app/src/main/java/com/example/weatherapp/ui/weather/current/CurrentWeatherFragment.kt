@@ -8,11 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
-import com.example.weatherapp.data.network.ApiWeather
 import com.example.weatherapp.data.dataBase.DataBase
 import com.example.weatherapp.data.db.CurrentWeatherDao
 import com.example.weatherapp.data.entity.Current
 import com.example.weatherapp.data.entity.ResponseGetWeather
+import com.example.weatherapp.data.network.ApiWeather
 import com.example.weatherapp.data.network.RetrofitWeatherInstance
 import com.example.weatherapp.data.provider.UnitProvider
 import com.example.weatherapp.data.provider.UnitSystem
@@ -26,7 +26,7 @@ class CurrentWeatherFragment : Fragment() {
     var dataBase: DataBase? = null
     var currentDao: CurrentWeatherDao? = null
 
-    lateinit var unitProvider : UnitProvider
+    private lateinit var unitProvider : UnitProvider
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -77,7 +77,7 @@ class CurrentWeatherFragment : Fragment() {
                         textView_condition.text = response.body()?.current?.weather?.get(0)?.description
                         updateTemperatures(response.body()?.current!!.temp, response.body()?.current!!.feelsLike)
                         updateWind(response.body()?.current!!.windSpeed)
-                        textView_humidity.text = response.body()?.current?.humidity.toString()
+                        textView_humidity.text = "Humidity: ${response.body()?.current?.humidity}%"
                         updateVisibility(response.body()?.current!!.visibility)
                         Glide.with(this@CurrentWeatherFragment)
                                 .load("http://openweathermap.org/img/wn/${response.body()?.current?.weather?.get(0)?.icon}@2x.png")
@@ -100,18 +100,18 @@ class CurrentWeatherFragment : Fragment() {
     }
 
     private fun updateTemperatures(temperature: Double, feelsLike: Double) {
-        val unitAbbreviation = chooseUnit("°C", "°F")
-        textView_temperature.text = "$temperature$unitAbbreviation"
-        textView_feels_like_temperature.text = "Feels like $feelsLike$unitAbbreviation"
+        //val unitAbbreviation = chooseUnit("°C", "°F")
+        textView_temperature.text = "$temperature"
+        textView_feels_like_temperature.text = "Feels like: $feelsLike"
     }
 
     private fun updateWind(windSpeed: Double) {
-        val unitAbbreviation = chooseUnit("kph", "mph")
-        textView_wind.text = "Wind: $windSpeed $unitAbbreviation"
+        //val unitAbbreviation = chooseUnit("kph", "mph")
+        textView_wind.text = "Wind: $windSpeed"
     }
 
     private fun updateVisibility(visibilityDistance: Int) {
-        val unitAbbreviation = chooseUnit("km", "mi.")
-        textView_visibility.text = "Visibility: $visibilityDistance $unitAbbreviation"
+        //val unitAbbreviation = chooseUnit("km", "mi.")
+        textView_visibility.text = "Visibility: $visibilityDistance"
     }
 }
