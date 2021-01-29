@@ -1,8 +1,13 @@
 package com.example.weatherapp.data.entity
 
 import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+const val FUTURE_WEATHER_ID = 0
+
+@Entity(tableName = "future_weather")
 data class Daily(
     @SerializedName("clouds")
     val clouds: Int,
@@ -34,4 +39,7 @@ data class Daily(
     val windDeg: Int,
     @SerializedName("wind_speed")
     val windSpeed: Double
-)
+){
+    @PrimaryKey(autoGenerate = false)
+    var id: Int = FUTURE_WEATHER_ID
+}

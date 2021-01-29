@@ -3,7 +3,9 @@ package com.example.weatherapp.data.dataBase
 import android.content.Context
 import androidx.room.*
 import com.example.weatherapp.data.db.CurrentWeatherDao
+import com.example.weatherapp.data.db.FutureWeatherDao
 import com.example.weatherapp.data.entity.Current
+import com.example.weatherapp.data.entity.Daily
 import com.example.weatherapp.data.entity.WeatherListConverter
 
 @Database(
@@ -13,6 +15,7 @@ import com.example.weatherapp.data.entity.WeatherListConverter
 abstract class DataBase : RoomDatabase() {
 
     abstract fun getCurrentWeatherDao() : CurrentWeatherDao
+    //abstract fun getFutureWeatherDao() : FutureWeatherDao
 
     companion object {
 

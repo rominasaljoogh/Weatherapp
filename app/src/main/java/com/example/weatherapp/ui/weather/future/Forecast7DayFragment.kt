@@ -62,8 +62,8 @@ class Forecast7DayFragment : Fragment() {
 
     private fun registerRecycler(responseData: ResponseGetWeather){
 
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL , false)
-        recyclerView.adapter = MyItemRecyclerViewAdapter (responseData)
+        recyclerViewDaily.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL , false)
+        recyclerViewDaily.adapter = MyItemRecyclerViewAdapter (responseData)
     }
 
 }
