@@ -136,7 +136,9 @@ class CurrentWeatherFragment : Fragment() {
 
     private fun registerRecyclerh(responseData: ResponseGetWeather){
 
+        val unitAbbreviation = chooseUnit("°C", "°F")
+
         recyclerViewHourly.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL , false)
-        recyclerViewHourly.adapter = HourlyItemRecyclerViewAdapter (responseData)
+        recyclerViewHourly.adapter = HourlyItemRecyclerViewAdapter (responseData,unitAbbreviation)
     }
 }

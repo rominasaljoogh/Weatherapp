@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.fragment_current_item_hourly.view.*
 import java.text.SimpleDateFormat
 
 class HourlyItemRecyclerViewAdapter (
-        private val responseData: ResponseGetWeather
+        private val responseData: ResponseGetWeather,
+        val unitAbbreviatio: String
 //    , private val onclick : (ResponseGetFutureWeather) -> Unit
 ) : RecyclerView.Adapter<HourlyItemRecyclerViewAdapter.ViewHolder>() {
 
@@ -30,7 +31,7 @@ class HourlyItemRecyclerViewAdapter (
         val dateFh : SimpleDateFormat = SimpleDateFormat("K:mm a")
         holder.textViewDateH.text = dateFh.format((responseData.hourly[position].dt)*1000)
 
-        holder.textViewTemperatureH.text = responseData.hourly[position].temp.toString()
+        holder.textViewTemperatureH.text = "${responseData.hourly[position].temp} $unitAbbreviatio"
         Glide.with(holder.itemView.context)
                 .load("http://openweathermap.org/img/wn/${responseData.hourly[position].weather[0].icon}@2x.png")
                 .into(holder.imageViewConditionIconH)

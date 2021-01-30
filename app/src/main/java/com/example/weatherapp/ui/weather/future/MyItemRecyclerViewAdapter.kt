@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.fragment_forecast7_day.view.*
 import java.text.SimpleDateFormat
 
 class MyItemRecyclerViewAdapter(
-    private val responseData: List<Daily>
+    private val responseData: List<Daily>,
+    val unitAbbreviatio: String
 //    , private val onclick : (ResponseGetFutureWeather) -> Unit
 ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
@@ -31,7 +32,7 @@ class MyItemRecyclerViewAdapter(
         val dateF : SimpleDateFormat = SimpleDateFormat("E d/M")
         holder.textViewDate.text = dateF.format((responseData[position].dt)*1000)
 
-        holder.textViewTemperature.text = responseData[position].temp.day.toString()
+        holder.textViewTemperature.text = "${responseData[position].temp.day} $unitAbbreviatio"
         Glide.with(holder.itemView.context)
                 .load("http://openweathermap.org/img/wn/${responseData[position].weather[0].icon}@2x.png")
                 .into(holder.imageViewConditionIcon)

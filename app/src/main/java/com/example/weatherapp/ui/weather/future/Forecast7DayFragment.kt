@@ -21,7 +21,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 class Forecast7DayFragment : Fragment() {
 
     var dataBase: DataBaseforFuture? = null
@@ -45,7 +44,7 @@ class Forecast7DayFragment : Fragment() {
         if(unitProvider == UnitSystem.METRIC) unit=true
 
         getWeather()
-        configureDB()
+        //configureDB()
     }
 
     private fun configureDB(){
@@ -78,7 +77,7 @@ class Forecast7DayFragment : Fragment() {
 
                         group_loading.visibility = View.GONE
                         response.body()?.daily?.let { registerRecycler(it) }
-                        response.body()?.daily?.let { saveAllCurrent(it) }
+                        //response.body()?.daily?.let { saveAllCurrent(it) }
 
                     }
 
@@ -91,16 +90,18 @@ class Forecast7DayFragment : Fragment() {
             currentDao?.insertFutureWeather(daily)
         }
         else{
-            //currentDao?.deleteAllF(daily)
-            //currentDao?.insertFutureWeather(daily)
+            currentDao?.deleteAllF(daily)
+            currentDao?.insertFutureWeather(daily)
         }
 
     }
 
     private fun registerRecycler(responseData: List<Daily>){
 
+        val unitAbbreviation = chooseUnit("°C", "°F")
+
         recyclerViewDaily.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL , false)
-        recyclerViewDaily.adapter = MyItemRecyclerViewAdapter (responseData)
+        recyclerViewDaily.adapter = MyItemRecyclerViewAdapter (responseData,unitAbbreviation)
     }
 
     private fun chooseUnit(metric: String, imperial: String): String {

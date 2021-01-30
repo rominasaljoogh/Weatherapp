@@ -6,16 +6,19 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.weatherapp.data.db.FutureWeatherDao
+import com.example.weatherapp.data.db.HourlyWeatherDao
 import com.example.weatherapp.data.entity.Daily
+import com.example.weatherapp.data.entity.Hourly
 import com.example.weatherapp.data.entity.WeatherListConverter
 
 @Database(
-        entities = [Daily::class] , version = 1)
+        entities = [Daily::class, Hourly::class] , version = 1)
 
 @TypeConverters(WeatherListConverter::class)
 abstract class DataBaseforFuture : RoomDatabase() {
 
     abstract fun getFutureWeatherDao() : FutureWeatherDao
+    abstract fun getHourlyWeatherDao() : HourlyWeatherDao
 
     companion object {
 
