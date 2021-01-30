@@ -9,13 +9,12 @@ import com.example.weatherapp.data.entity.Daily
 import com.example.weatherapp.data.entity.WeatherListConverter
 
 @Database(
-        entities = [Current ::class] , version = 1)
+        entities = [Current::class] , version = 1)
 
 @TypeConverters(WeatherListConverter::class)
 abstract class DataBase : RoomDatabase() {
 
     abstract fun getCurrentWeatherDao() : CurrentWeatherDao
-    //abstract fun getFutureWeatherDao() : FutureWeatherDao
 
     companion object {
 

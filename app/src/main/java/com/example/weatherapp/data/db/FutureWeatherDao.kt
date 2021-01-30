@@ -1,17 +1,17 @@
 package com.example.weatherapp.data.db
 
 import androidx.room.*
-import com.example.weatherapp.data.entity.CURRENT_WEATHER_ID
-import com.example.weatherapp.data.entity.Current
+import com.example.weatherapp.data.entity.Daily
+import com.example.weatherapp.data.entity.FUTURE_WEATHER_ID
 
 @Dao
 interface FutureWeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFutureWeather(weatherEntry: Current)
+    fun insertFutureWeather(weatherEntry: List<Daily>)
 
     @Delete
-    fun deleteAll(weatherEntry: Current)
+    fun deleteAllF(weatherEntry: List<Daily>)
 
-    @Query("select * from current_weather where id = $CURRENT_WEATHER_ID")
-    fun getAllFutureData(): Current
+    @Query("select * from future_weather where id = $FUTURE_WEATHER_ID")
+    fun getAllFutureData(): List<Daily>
 }

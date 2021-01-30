@@ -43,7 +43,7 @@ class CurrentWeatherFragment : Fragment() {
         (activity as? AppCompatActivity)?.supportActionBar?.title = "Today"
 
         val unitProvider = UnitProviderImpl(requireContext()).getUnitSystem()
-        if(unitProvider==UnitSystem.METRIC) unit=true
+        if(unitProvider == UnitSystem.METRIC) unit=true
 
         configureDB()
         getWeather()
@@ -64,7 +64,7 @@ class CurrentWeatherFragment : Fragment() {
 
         val unitapi = chooseUnit("metric", "imperial")
 
-        currentWeatherService.getWeather("35.689198", "51.388973","80f4cf199c6d13111b4d9a31580c3118","$unitapi")
+        currentWeatherService.getWeather("35.689198", "51.388973","80f4cf199c6d13111b4d9a31580c3118", unitapi)
                 .enqueue(object : Callback<ResponseGetWeather> {
                     override fun onFailure(call: Call<ResponseGetWeather>, t: Throwable) {
 
@@ -95,7 +95,7 @@ class CurrentWeatherFragment : Fragment() {
             currentDao?.insertCurrentWeather(current)
         }
         else{
-            currentDao?.deleteAll(current)
+            currentDao?.deleteAllC(current)
             currentDao?.insertCurrentWeather(current)
         }
 

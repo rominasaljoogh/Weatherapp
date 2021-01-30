@@ -3,6 +3,7 @@ package com.example.weatherapp.ui.weather.current
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -24,15 +25,15 @@ class HourlyItemRecyclerViewAdapter (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.textView_conditionh.text = responseData.hourly[position].weather[0].description
+        holder.textViewConditionH.text = responseData.hourly[position].weather[0].description
 
-        val dateFh : SimpleDateFormat = SimpleDateFormat("h:m")
-        holder.textView_dateh.text = dateFh.format((responseData.hourly[position].dt)*1000)
+        val dateFh : SimpleDateFormat = SimpleDateFormat("K:mm a")
+        holder.textViewDateH.text = dateFh.format((responseData.hourly[position].dt)*1000)
 
-        holder.textView_temperatureh.text = responseData.hourly[position].temp.toString()
+        holder.textViewTemperatureH.text = responseData.hourly[position].temp.toString()
         Glide.with(holder.itemView.context)
                 .load("http://openweathermap.org/img/wn/${responseData.hourly[position].weather[0].icon}@2x.png")
-                .into(holder.imageView_condition_iconh)
+                .into(holder.imageViewConditionIconH)
 
 //        holder.itemView.setOnClickListener{
 //            onclick(data[position])
@@ -43,9 +44,9 @@ class HourlyItemRecyclerViewAdapter (
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        var textView_conditionh: TextView = view.textView_conditionh
-        var textView_dateh: TextView = view.textView_dateh
-        var textView_temperatureh: TextView = view.textView_temperatureh
-        var imageView_condition_iconh = view.imageView_condition_iconh
+        var textViewConditionH: TextView = view.textView_conditionh
+        var textViewDateH: TextView = view.textView_dateh
+        var textViewTemperatureH: TextView = view.textView_temperatureh
+        var imageViewConditionIconH: ImageView = view.imageView_condition_iconh
     }
 }
