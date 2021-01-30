@@ -1,8 +1,10 @@
 package com.example.weatherapp.data.entity
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 const val HOURLY_WEATHER_ID = 0
 
@@ -33,8 +35,7 @@ data class Hourly(
     @SerializedName("wind_deg")
     val windDeg: Double,
     @SerializedName("wind_speed")
-    val windSpeed: Double
-){
+    val windSpeed: Double,
     @PrimaryKey(autoGenerate = false)
     var id: Int = HOURLY_WEATHER_ID
-}
+)

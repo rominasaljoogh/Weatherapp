@@ -81,24 +81,12 @@ class CurrentWeatherFragment : Fragment() {
                             response: Response<ResponseGetWeather>) {
 
                         group_loading.visibility = View.GONE
-                        response.body()?.current?.let { saveAllCurrent(it) }
+                        response.body()?.current?.let { currentDao?.insertCurrentWeather(it) }
                         response.body()?.current?.let { updateAllCurrent(it) }
                         response.body()?.let { registerRecyclerh(it) }
                     }
 
                 })
-    }
-
-    private fun saveAllCurrent(current: Current) {
-
-        if(current == null){
-            currentDao?.insertCurrentWeather(current)
-        }
-        else{
-            currentDao?.deleteAllC(current)
-            currentDao?.insertCurrentWeather(current)
-        }
-
     }
 
     private fun updateAllCurrent(currentWeather: Current){

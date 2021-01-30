@@ -15,7 +15,21 @@
         android:id="@+id/forecast7DayFragment"
         android:name="com.example.weatherapp.ui.weather.future.Forecast7DayFragment"
         android:label="Forecast7DayFragment"
-        tools:layout="@layout/fragment_forecast7_day_list"/>
+        tools:layout="@layout/fragment_forecast7_day_list">
+        <action
+            android:id="@+id/action_forecast7DayFragment_to_forecast7DayDetailsFragment"
+            app:destination="@id/forecast7DayDetailsFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/forecast7DayDetailsFragment"
+        android:name="com.example.weatherapp.ui.weather.future.Forecast7DayDetailsFragment"
+        android:label="Forecast7DayDetailsFragment"
+        tools:layout="@layout/fragment_forecast7_day_details">
+        <argument
+            android:name="Daily"
+            app:argType="com.example.weatherapp.data.entity.Daily"/>
+    </fragment>
 
     <fragment
         android:id="@+id/settingsFragment"

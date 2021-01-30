@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.data.dataBase.DataBaseforFuture
@@ -44,7 +45,7 @@ class Forecast7DayFragment : Fragment() {
         if(unitProvider == UnitSystem.METRIC) unit=true
 
         getWeather()
-        //configureDB()
+        configureDB()
     }
 
     private fun configureDB(){
@@ -77,6 +78,7 @@ class Forecast7DayFragment : Fragment() {
 
                         group_loading.visibility = View.GONE
                         response.body()?.daily?.let { registerRecycler(it) }
+                        //response.body()?.let { currentDao?.insertFutureWeather(it.daily) }
                         //response.body()?.daily?.let { saveAllCurrent(it) }
 
                     }
@@ -84,24 +86,14 @@ class Forecast7DayFragment : Fragment() {
                 })
     }
 
-    private fun saveAllCurrent(daily: List<Daily>) {
-
-        if(daily == null){
-            currentDao?.insertFutureWeather(daily)
-        }
-        else{
-            currentDao?.deleteAllF(daily)
-            currentDao?.insertFutureWeather(daily)
-        }
-
-    }
-
     private fun registerRecycler(responseData: List<Daily>){
 
         val unitAbbreviation = chooseUnit("°C", "°F")
 
         recyclerViewDaily.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL , false)
-        recyclerViewDaily.adapter = MyItemRecyclerViewAdapter (responseData,unitAbbreviation)
+        recyclerViewDaily.adapter = MyItemRecyclerViewAdapter (responseData,unitAbbreviation){ onclick ->
+            findNavController().navigate(Forecast7DayFragmentDirections.actionForecast7DayFragmentToForecast7DayDetailsFragment(onclick))
+        }
     }
 
     private fun chooseUnit(metric: String, imperial: String): String {

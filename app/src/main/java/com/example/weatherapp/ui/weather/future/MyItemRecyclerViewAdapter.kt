@@ -14,8 +14,8 @@ import java.text.SimpleDateFormat
 
 class MyItemRecyclerViewAdapter(
     private val responseData: List<Daily>,
-    val unitAbbreviatio: String
-//    , private val onclick : (ResponseGetFutureWeather) -> Unit
+    val unitAbbreviatio: String,
+    private val onclick : (Daily) -> Unit
 ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,9 +37,9 @@ class MyItemRecyclerViewAdapter(
                 .load("http://openweathermap.org/img/wn/${responseData[position].weather[0].icon}@2x.png")
                 .into(holder.imageViewConditionIcon)
 
-//        holder.itemView.setOnClickListener{
-//            onclick(data[position])
-//          }
+        holder.itemView.setOnClickListener{
+            onclick(responseData[position])
+          }
         }
 
     override fun getItemCount(): Int = responseData.size
